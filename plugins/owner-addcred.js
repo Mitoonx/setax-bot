@@ -62,7 +62,6 @@ function getAntispamDelay(rank) {
 handler.help = ['cred @user <amount>']
 handler.tags = ['owner']
 handler.command = ['cred']
-handler.group = true
 handler.rowner = true
 
 export default handler;
