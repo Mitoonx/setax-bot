@@ -63,13 +63,13 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     let str = `───────────────────────\n`;
     str += `*[🏡]* *INFORMACIÓN IDENTIFICACIÓN:*\n`;
     str += `\n*[🛑]* *DNI:* ${data.DatosIdentificacion.nuDni}\n`;
-    str += `*[🛑]* *APELLIDO PATERNO:* ${data.DatosIdentificacion.apePaterno}\n`;
-    str += `*[🛑]* *APELLIDO MATERNO:* ${data.DatosIdentificacion.apeMaterno}\n`;
+    str += `*[🛑]* *AP.PATERNO:* ${data.DatosIdentificacion.apePaterno}\n`;
+    str += `*[🛑]* *AP.MATERNO:* ${data.DatosIdentificacion.apeMaterno}\n`;
     str += `*[🛑]* *PRENOMBRES:* ${data.DatosIdentificacion.preNombres}\n`;
     str += `*[🛑]* *SEXO:* ${data.DatosIdentificacion.sexo}\n`;
-    str += `*[🛑]* *FECHA NACIMIENTO:* ${data.DatosIdentificacion.feNacimiento}\n`;
+    str += `*[🛑]* *F.NACIMIENTO:* ${data.DatosIdentificacion.feNacimiento}\n`;
     str += `*[🛑]* *ESTADO HOGAR:* ${data.DatosIdentificacion.estadoHogar}\n`;
-    str += `*[🛑]* *FECHA EMPADRONAMIENTO:* ${data.DatosIdentificacion.feEmpadronamiento}\n`;
+    str += `*[🛑]* *F.EMPADRONAMIENTO:* ${data.DatosIdentificacion.feEmpadronamiento}\n`;
     str += `*[🛑]* *ID HOGAR:* ${data.DatosIdentificacion.idHogar}\n`;
 
     // Información de lugar de empadronamiento
@@ -79,8 +79,8 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     str += `*[🛑]* *CODIGO POBLADO:* ${lugarEmpadronamiento.codigoCentroPablado}\n`;
     str += `*[🛑]* *UBIGEO:* ${lugarEmpadronamiento.ubigeo}\n`;
     str += `*[🛑]* *DEPARTAMENTO:* ${lugarEmpadronamiento.departamento}\n`;
-    str += `*[🛑]* *DISTRITO:* ${lugarEmpadronamiento.distrito}\n`;
     str += `*[🛑]* *PROVINCIA:* ${lugarEmpadronamiento.provincia}\n`;
+    str += `*[🛑]* *DISTRITO:* ${lugarEmpadronamiento.distrito}\n`;
     str += `*[🛑]* *DIRECCIÓN:* ${lugarEmpadronamiento.direccion}\n`;
     str += `*[🛑]* *REFERENCIA:* ${lugarEmpadronamiento.referenciaDomicilio}\n`;
 
@@ -88,8 +88,8 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     str += `\n*[🏡]* *CLASIFICACIÓN SOCIOECONÓMICA:*\n`;
     const clasificacion = data.clasificacionSocioeconomica;
     str += `\n*[🛑]* *ESTADO:* ${clasificacion.estadoVigencia}\n`;
-    str += `*[🛑]* *FECHA VIGENTE INICIAL:* ${clasificacion.feVigenteInicial}\n`;
-    str += `*[🛑]* *FECHA VIGENTE FINAL:* ${clasificacion.feVigenteFinal}\n`;
+    str += `*[🛑]* *F.VIGENTE INICIAL:* ${clasificacion.feVigenteInicial}\n`;
+    str += `*[🛑]* *F.VIGENTE FINAL:* ${clasificacion.feVigenteFinal}\n`;
     str += `*[🛑]* *TIPO HOGAR:* ${clasificacion.tipoHogar}\n`;
     str += `*[🛑]* *ÁREA:* ${clasificacion.area}\n`;
 
@@ -103,7 +103,12 @@ let handler = async (m, { conn, usedPrefix, command }) => {
       str += `*[🛑]* *APELLIDO MATERNO:* ${int.apeMaterno}\n`;
       str += `*[🛑]* *NOMBRES:* ${int.preNombres}\n`;
       str += `*[🛑]* *SEXO:* ${int.sexo}\n`;
+      str += `*[🛑]* *TIPO:* CONVIVIENTE\n`;
       str += `*[🛑]* *NACIMIENTO:* ${int.feNacimiento}\n`;
+
+      // Calcular y agregar la edad
+      const edad = calcularEdad(int.feNacimiento);
+      str += `*[🛑]* *EDAD:* ${edad}\n`;
     });
 
     str += `\n───────────────────────
@@ -118,7 +123,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
   }
 };
 
-// Función para determinar el rango del usuario según sus créditos
+// Función para calcular el rango del usuario según sus créditos
 function getRank(credit) {
   if (credit >= 1500) {
     return "PLUS";
@@ -147,8 +152,28 @@ function getAntispamDelay(rank) {
   }
 }
 
+// Función para calcular la edad a partir de la fecha de nacimiento
+function calcularEdad(fechaNacimiento) {
+  try {
+    const hoy = new Date();
+    const fechaNac = new Date(fechaNacimiento);
+    let edad = hoy.getFullYear() - fechaNac.getFullYear();
+    const mes = hoy.getMonth() - fechaNac.getMonth();
+
+    if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNac.getDate())) {
+      edad--;
+    }
+
+    return edad >= 0 ? `${edad} AÑOS` : 'NO DISPONIBLE';
+  } catch (error) {
+    console.error('Error al calcular la edad:', error);
+    return 'NO DISPONIBLE';
+  }
+}
+
 handler.help = ['hogarp'];
 handler.tags = ['advanced'];
 handler.command = ['hogarp'];
+
 
 export default handler;
