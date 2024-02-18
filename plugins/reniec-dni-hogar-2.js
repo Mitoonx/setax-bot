@@ -65,7 +65,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     str += `\n*[🛑]* *DNI:* ${data.DatosIdentificacion.nuDni}\n`;
     str += `*[🛑]* *AP.PATERNO:* ${data.DatosIdentificacion.apePaterno}\n`;
     str += `*[🛑]* *AP.MATERNO:* ${data.DatosIdentificacion.apeMaterno}\n`;
-    str += `*[🛑]* *PRENOMBRES:* ${data.DatosIdentificacion.preNombres}\n`;
+    str += `*[🛑]* *NOMBRES:* ${data.DatosIdentificacion.preNombres}\n`;
     str += `*[🛑]* *SEXO:* ${data.DatosIdentificacion.sexo}\n`;
     str += `*[🛑]* *F.NACIMIENTO:* ${data.DatosIdentificacion.feNacimiento}\n`;
     str += `*[🛑]* *ESTADO HOGAR:* ${data.DatosIdentificacion.estadoHogar}\n`;
@@ -99,8 +99,8 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     integrantes.forEach((int, index) => {
       str += `\n*[🏡]* *INTEGRANTE N°: ${index + 1}*\n`;
       str += `*[🛑]* *DNI:* ${int.nuDni}\n`;
-      str += `*[🛑]* *APELLIDO PATERNO:* ${int.apePaterno}\n`;
-      str += `*[🛑]* *APELLIDO MATERNO:* ${int.apeMaterno}\n`;
+      str += `*[🛑]* *AP.PATERNO:* ${int.apePaterno}\n`;
+      str += `*[🛑]* *AP.MATERNO:* ${int.apeMaterno}\n`;
       str += `*[🛑]* *NOMBRES:* ${int.preNombres}\n`;
       str += `*[🛑]* *SEXO:* ${int.sexo}\n`;
       str += `*[🛑]* *TIPO:* CONVIVIENTE\n`;
@@ -119,7 +119,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     conn.reply(m.chat, str, m);
   } catch (error) {
     console.error('*[⚠️]* ERROR AL CONSULTAR AL SERVIDOR:', error);
-    conn.reply(m.chat, '*[⚠️]* EL DNI CONSULTADO NO SE ENCUENTRA REGISTRADO EN EL PGH', m);
+    conn.reply(m.chat, '*[⚠️]* EL DNI CONSULTADO NO SE ENCUENTRA REGISTRADO EN EL *PGH*', m);
   }
 };
 
