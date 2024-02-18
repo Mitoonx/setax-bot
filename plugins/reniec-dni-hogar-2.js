@@ -66,7 +66,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     str += `*[🛑]* *AP.PATERNO:* ${data.DatosIdentificacion.apePaterno}\n`;
     str += `*[🛑]* *AP.MATERNO:* ${data.DatosIdentificacion.apeMaterno}\n`;
     str += `*[🛑]* *NOMBRES:* ${data.DatosIdentificacion.preNombres}\n`;
-    str += `*[🛑]* *SEXO:* ${data.DatosIdentificacion.sexo}\n`;
+    str += `*[🛑]* *GENERO:* ${data.DatosIdentificacion.sexo}\n`;
     str += `*[🛑]* *F.NACIMIENTO:* ${data.DatosIdentificacion.feNacimiento}\n`;
     str += `*[🛑]* *ESTADO HOGAR:* ${data.DatosIdentificacion.estadoHogar}\n`;
     str += `*[🛑]* *F.EMPADRONAMIENTO:* ${data.DatosIdentificacion.feEmpadronamiento}\n`;
@@ -102,7 +102,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
       str += `*[🛑]* *AP.PATERNO:* ${int.apePaterno}\n`;
       str += `*[🛑]* *AP.MATERNO:* ${int.apeMaterno}\n`;
       str += `*[🛑]* *NOMBRES:* ${int.preNombres}\n`;
-      str += `*[🛑]* *SEXO:* ${int.sexo}\n`;
+      str += `*[🛑]* *GENERO:* ${int.sexo}\n`;
       str += `*[🛑]* *TIPO:* CONVIVIENTE\n`;
       str += `*[🛑]* *NACIMIENTO:* ${int.feNacimiento}\n`;
 
