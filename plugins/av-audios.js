@@ -17,6 +17,7 @@ let audioMsg = {
   'fino señores': './src/mp3/fino.mp3',
   'santi': './src/mp3/audio_gay.ogg',
   'free': './src/mp3/audio_ABuenoBro.ogg',
+  'fabri': './src/mp3/audio_fabri.ogg',
   'buenos días': 'https://k.top4top.io/m_2826iqdri1.mp3',
   'buenas tardes': 'https://b.top4top.io/m_2826v2zg51.mp3',
   'buenas noches': 'https://i.top4top.io/m_2826o8rfj1.mp3',
