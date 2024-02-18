@@ -88,7 +88,7 @@ let { version, isLatest } = await fetchLatestBaileysVersion()
   printQRInTerminal: true,
   auth: state,
   logger: pino({ level: 'silent'}),
-  browser: ['dylux-bot','Safari','1.0.0']
+  browser: ['setax-bot','Safari','1.0.0']
 }*/ 
 const connectionOptions = {
 	    version,
