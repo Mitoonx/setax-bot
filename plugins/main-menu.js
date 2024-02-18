@@ -160,13 +160,13 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
     m.react('📚') 
     
   } catch (e) {
-    conn.reply(m.chat, '❎ Lo sentimos, el menú tiene un error', m)
+    conn.reply(m.chat, '*[⚠️]* *ESTAMOS EN MANTENIMIENTO*', m)
     throw e
   }
 }
 //handler.help = ['help']
 //handler.tags = ['main']
-handler.command = ['menu', 'help', 'menú'] 
+handler.command = ['menux'] 
 handler.register = false
 
 export default handler
