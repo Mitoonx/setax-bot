@@ -95,17 +95,17 @@ async function start(file) {
     const packageJsonData = await fsPromises.readFile(packageJsonPath, 'utf-8');
     const packageJsonObj = JSON.parse(packageJsonData);
     console.log(chalk.blue.bold(`\n[📦] INFORMACIÓN DEL PAQUETE`));
-    console.log(chalk.cyan(`Nombre: ${packageJsonObj.name}`));
-    console.log(chalk.cyan(`Versión: ${packageJsonObj.version}`));
-    console.log(chalk.cyan(`Descripción: ${packageJsonObj.description}`));
-    console.log(chalk.cyan(`Autor: ${packageJsonObj.author.name}`));
+    console.log(chalk.cyan(`NOMBRE: ${packageJsonObj.name}`));
+    console.log(chalk.cyan(`VERSIÓN: ${packageJsonObj.version}`));
+    console.log(chalk.cyan(`DESCRIPCIÓN: ${packageJsonObj.description}`));
+    console.log(chalk.cyan(`AUTOR: ${packageJsonObj.author.name}`));
   } catch (err) {
     console.error(chalk.red(`[❌] NO SE PUDO LEER EL ARCHIVO PACKAGE.JSON: ${err}`));
   }
 
 
   console.log(chalk.blue.bold(`\n[⏰] HORA ACTUAL`));
-  const currentTime = new Date().toLocaleString('es-ES', { timeZone: 'America/Argentina/Buenos_Aires' })
+  const currentTime = new Date().toLocaleString('es-ES', { timeZone: 'America/Peru/Lima' })
   //const currentTime = new Date().toLocaleString();
   console.log(chalk.cyan(`${currentTime}`));
 
