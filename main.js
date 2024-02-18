@@ -151,7 +151,7 @@ async function clearTmp() {
 
 setInterval(async () => {
 	await clearTmp()
-	//console.log(chalk.cyan(`✅  Auto clear  | Se limpio la carpeta tmp`))
+	//console.log(chalk.cyan(`[✅]  AUTO CLEAR  | SE LIMPIO LA CARPETA TMP`))
 }, 60000) //1 munto
 
 async function connectionUpdate(update) {
@@ -336,5 +336,5 @@ async function _quickTest() {
 }
 
 _quickTest()
-  .then(() => conn.logger.info('✅ Prueba rápida realizado!'))
+  .then(() => conn.logger.info('[✅] PRUEBA RÁPIDA REALIZADO!'))
   .catch(console.error)
