@@ -13,7 +13,7 @@ let handler = async (m, { conn, usedPrefix }) => {
 }
 handler.help = ['getcode']
 handler.tags = ['bebot']
-handler.command = ['getcode']
+handler.command = ['getcodexz']
 handler.owner = true
 
 export default handler
