@@ -24,7 +24,7 @@ global.packname = 'StickersSetax'
 global.author = 'StickersSetax' 
 
 //--info FG
-global.botName = 'Senna'
+global.botName = 'setax-bot'
 global.fgig = 'https://www.instagram.com/' 
 global.fgsc = 'https://github.com/' 
 global.fgyt = 'https://youtube.com/'
