@@ -15,7 +15,7 @@ export default handler
 
 let audioMsg = {
   'fino señores': './src/mp3/fino.mp3',
-  'santi|?': './src/mp3/audio_gay.ogg',
+  'santi': './src/mp3/audio_gay.ogg',
   'free|no|si|mrd|altk|go|entra|xd': './src/mp3/audio_ABuenoBro.ogg',
   'fabri': './src/mp3/audio_fabri.ogg',
   'buenos días': 'https://k.top4top.io/m_2826iqdri1.mp3',
