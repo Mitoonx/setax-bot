@@ -2,16 +2,21 @@ import { execSync } from 'child_process';
 
 let handler = async (m, { conn, text }) => {
     try {
-        // Utiliza un emoji específico en lugar de 'done'
         m.react('✅');
 
         if (conn.user.jid == conn.user.jid) {
-            let stdout = execSync('git pull' + (m.fromMe && text ? ' ' + text : ''))
-            //require('fs').readdirSync('plugins').map(v=>global.reload('', v))
+            // Hacer un stash de los cambios locales
+            execSync('git stash');
+
+            // Realizar un pull desde GitHub
+            let stdout = execSync('git pull' + (m.fromMe && text ? ' ' + text : ''));
+
+            // Aplicar los cambios del stash (si hay alguno)
+            execSync('git stash apply');
+
             conn.reply(m.chat, stdout.toString(), m);
         }
     } catch (error) {
-        // Maneja cualquier error que pueda ocurrir durante el proceso
         conn.reply(m.chat, 'Error al actualizar: ' + error.message, m);
     }
 }
