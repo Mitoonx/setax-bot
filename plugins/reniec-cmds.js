@@ -23,7 +23,7 @@ let str = `┌───「 *MENÚ COMANDOS* 」
 ▢ *[✳️]* *RESPUESTA:* DATOS RENIEC BASICOS
 
 ▢ *[📍]* *RENIEC MEDIO [PREMIUM]:*
-▢ *[✳️]* *ESTADO:* *ONLINE* *[✅]*
+▢ *[✳️]* *ESTADO:* *OFF* *[❌]*
 ▢ *[✳️]* *USO:* /dnix 12345678
 ▢ *[✳️]* *CONSUMO:* 1 CREDITOS
 ▢ *[✳️]* *RESPUESTA:* DATOS RENIEC MEDIOS
