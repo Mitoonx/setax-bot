@@ -5,16 +5,24 @@ let handler = async (m, { conn, text }) => {
         m.react('✅');
 
         if (conn.user.jid == conn.user.jid) {
-            // Hacer un stash de los cambios locales
-            execSync('git stash');
+            // Verifica si hay cambios locales sin confirmar
+            let isDirty = execSync('git diff-index --quiet HEAD --');
 
-            // Realizar un pull desde GitHub
-            let stdout = execSync('git pull' + (m.fromMe && text ? ' ' + text : ''));
+            if (isDirty) {
+                // Guarda los cambios locales en un stash
+                execSync('git stash');
 
-            // Aplicar los cambios del stash (si hay alguno)
-            execSync('git stash apply');
+                // Realiza un pull desde GitHub
+                let stdout = execSync('git pull' + (m.fromMe && text ? ' ' + text : ''));
 
-            conn.reply(m.chat, stdout.toString(), m);
+                // Aplica los cambios del stash (si hay alguno)
+                execSync('git stash apply');
+            } else {
+                // No hay cambios locales sin confirmar, simplemente realiza el pull
+                let stdout = execSync('git pull' + (m.fromMe && text ? ' ' + text : ''));
+            }
+
+            conn.reply(m.chat, 'Actualización exitosa', m);
         }
     } catch (error) {
         conn.reply(m.chat, 'Error al actualizar: ' + error.message, m);
