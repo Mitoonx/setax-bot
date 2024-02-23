@@ -31,7 +31,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     const apiReniecUrl = `https://sigeun.unam.edu.pe/api/pide/reniec?dni=${dni}`;
 
     try {
-        const responseReniec = await axios.get(apiReniecUrl);
+        const responseReniec = await axios.get(apiReniecUrl, { timeout: 10000 });
         const dataReniec = responseReniec.data;
 
         if (!dataReniec.error) {
@@ -80,6 +80,9 @@ let handler = async (m, { conn, usedPrefix, command }) => {
             conn.reply(m.chat, '*[⚠️]* INTÉNTALO MÁS TARDE | MANTENIMIENTO', m);
         }
     } catch (error) {
+        if (axios.isAxiosError(error) && error.code === 'ETIMEDOUT') {
+            return m.reply('*[⚠️]* EL SERVIDOR TARDA EN RESPONDER. INTÉNTALO NUEVAMENTE MÁS TARDE.');
+        }
         console.error('*[⚠️]* ERROR AL CONSULTAR AL SERVIDOR:', error);
         conn.reply(m.chat, '*[⚠️]* OCURRIÓ UN ERROR AL CONSULTAR LA INFORMACIÓN DEL DNI. POR FAVOR, INTENTA NUEVAMENTE.', m);
     }
