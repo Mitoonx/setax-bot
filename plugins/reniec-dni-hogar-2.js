@@ -19,7 +19,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 
   if (!m.text || m.text.split(' ').length < 2) {
     if (isPremium) {
-      return m.reply(`*[✳️]* *CÓMO USAR:* ${usedPrefix}${command} *[N° DE DNI]*\n*[📌]* *EJEMPLO:* ${usedPrefix}${command} *12345678*\n*[📌]* *RESPONDE:* *DATOS HOGAR*`);
+      return m.reply(`*[✳️]* *CÓMO USAR:* ${usedPrefix}${command} *[N° DE DNI]*\n*[📌]* *EJEMPLO:* ${usedPrefix}${command} *12345678*\n*[📌]* *RESPONDE:* *DATOS HOGAR SISFOH*`);
     } else {
       return m.reply('*[⚠️]* NECESITAS SER USUARIO *PREMIUM* O *TENER CRÉDITOS* PARA ACCEDER A ESTE COMANDO.');
     }
@@ -65,8 +65,8 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     str += `\n*[🛑]* *DNI:* ${data.DatosIdentificacion.nuDni}\n`;
     str += `*[🛑]* *AP.PATERNO:* ${data.DatosIdentificacion.apePaterno}\n`;
     str += `*[🛑]* *AP.MATERNO:* ${data.DatosIdentificacion.apeMaterno}\n`;
-    str += `*[🛑]* *NOMBRES:* ${data.DatosIdentificacion.preNombres}\n`;
-    str += `*[🛑]* *GENERO:* ${data.DatosIdentificacion.sexo}\n`;
+    str += `*[🛑]* *PRENOMBRES:* ${data.DatosIdentificacion.preNombres}\n`;
+    str += `*[🛑]* *SEXO:* ${data.DatosIdentificacion.sexo}\n`;
     str += `*[🛑]* *F.NACIMIENTO:* ${data.DatosIdentificacion.feNacimiento}\n`;
     str += `*[🛑]* *ESTADO HOGAR:* ${data.DatosIdentificacion.estadoHogar}\n`;
     str += `*[🛑]* *F.EMPADRONAMIENTO:* ${data.DatosIdentificacion.feEmpadronamiento}\n`;
@@ -99,10 +99,10 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     integrantes.forEach((int, index) => {
       str += `\n*[🏡]* *INTEGRANTE N°: ${index + 1}*\n`;
       str += `*[🛑]* *DNI:* ${int.nuDni}\n`;
-      str += `*[🛑]* *AP.PATERNO:* ${int.apePaterno}\n`;
-      str += `*[🛑]* *AP.MATERNO:* ${int.apeMaterno}\n`;
+      str += `*[🛑]* *APELLIDO PATERNO:* ${int.apePaterno}\n`;
+      str += `*[🛑]* *APELLIDO MATERNO:* ${int.apeMaterno}\n`;
       str += `*[🛑]* *NOMBRES:* ${int.preNombres}\n`;
-      str += `*[🛑]* *GENERO:* ${int.sexo}\n`;
+      str += `*[🛑]* *SEXO:* ${int.sexo}\n`;
       str += `*[🛑]* *TIPO:* CONVIVIENTE\n`;
       str += `*[🛑]* *NACIMIENTO:* ${int.feNacimiento}\n`;
 
@@ -119,13 +119,15 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     conn.reply(m.chat, str, m);
   } catch (error) {
     console.error('*[⚠️]* ERROR AL CONSULTAR AL SERVIDOR:', error);
-    conn.reply(m.chat, '*[⚠️]* EL DNI CONSULTADO NO SE ENCUENTRA REGISTRADO EN EL *PGH*', m);
+    conn.reply(m.chat, '*[⚠️]* EL DNI CONSULTADO NO SE ENCUENTRA REGISTRADO EN EL PGH', m);
   }
 };
 
-// Función para calcular el rango del usuario según sus créditos
+// Function to determine user rank based on credits
 function getRank(credit) {
-  if (credit >= 1500) {
+  if (credit >= 100000) {
+     return "ADMINISTRADOR";
+  } else if (credit >= 1500) {
     return "PLUS";
   } else if (credit >= 500) {
     return "VIP";
@@ -133,22 +135,24 @@ function getRank(credit) {
     return "STANDARD";
   } else {
     return "FREE";
-  }
+}
 }
 
-// Función para obtener el tiempo de antispam según el rango del usuario
+// Function to determine antispam delay based on rank
 function getAntispamDelay(rank) {
   switch (rank) {
-    case "PLUS":
-      return 10 * 1000; // 10 segundos
-    case "VIP":
-      return 30 * 1000; // 30 segundos
-    case "STANDARD":
-      return 110 * 1000; // 110 segundos
-    case "FREE":
-      return 200 * 1000; // 200 segundos
-    default:
-      return 0;
+      case "ADMINISTRADOR":
+          return 0;
+      case "PLUS":
+          return 10 * 1000; // 10 seconds
+      case "VIP":
+          return 30 * 1000; // 30 seconds
+      case "STANDARD":
+          return 110 * 1000; // 110 seconds
+      case "FREE":
+          return 200 * 1000; // 200 seconds
+      default:
+          return 0;
   }
 }
 
