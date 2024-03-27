@@ -70,9 +70,11 @@ let handler = async (m, { conn, usedPrefix, command }) => {
   lastQueryTime[m.sender] = currentTime;
 };
 
-// Función para determinar el rango del usuario según sus créditos
+// Function to determine user rank based on credits
 function getRank(credit) {
-  if (credit >= 1500) {
+  if (credit >= 100000) {
+    return "ADMINISTRADOR";
+  } else if (credit >= 1500) {
     return "PLUS";
   } else if (credit >= 500) {
     return "VIP";
@@ -80,22 +82,24 @@ function getRank(credit) {
     return "STANDARD";
   } else {
     return "FREE";
-  }
+}
 }
 
-// Función para obtener el tiempo de antispam según el rango del usuario
+// Function to determine antispam delay based on rank
 function getAntispamDelay(rank) {
   switch (rank) {
-    case "PLUS":
-      return 10 * 1000; // 10 segundos
-    case "VIP":
-      return 30 * 1000; // 30 segundos
-    case "STANDARD":
-      return 110 * 1000; // 110 segundos
-    case "FREE":
-      return 200 * 1000; // 200 segundos
-    default:
-      return 0;
+      case "ADMINISTRADOR":
+          return 0;
+      case "PLUS":
+          return 10 * 1000; // 10 seconds
+      case "VIP":
+          return 30 * 1000; // 30 seconds
+      case "STANDARD":
+          return 110 * 1000; // 110 seconds
+      case "FREE":
+          return 200 * 1000; // 200 seconds
+      default:
+          return 0;
   }
 }
 
