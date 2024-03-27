@@ -19,7 +19,7 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
   m.reply(`┌───────────────────────
 *[⚠️]* PANEL ADMIN *ONLINE*
-*[✳️]* CRÉDITOS RESTADOS *ON*
+*[✳️]* CRÉDITOS *RESTADOS* *ON*
 *[✳️]* RANGO *RESTADO* *ON*
 *[🛑]* *USER:* @${who.split`@`[0]}
 *[🛑]* *NAME:* ${user.name}
@@ -33,31 +33,35 @@ let handler = async (m, { conn, text, usedPrefix, command }) => {
 
 // Function to determine user rank based on credits
 function getRank(credit) {
-  if (credit >= 1500) {
-    return "PLUS";
+  if (credit >= 100000) {
+     return "ADMINISTRADOR";
+  } else if (credit >= 1500) {
+     return "PLUS";
   } else if (credit >= 500) {
-    return "VIP";
+     return "VIP";
   } else if (credit >= 1) {
-    return "STANDARD";
+     return "STANDARD";
   } else {
-    return "FREE";
-  }
+     return "FREE";
+}
 }
 
 // Function to determine antispam delay based on rank
 function getAntispamDelay(rank) {
-    switch (rank) {
-        case "PLUS":
-            return 10 * 1000; // 10 seconds
-        case "VIP":
-            return 30 * 1000; // 30 seconds
-        case "STANDARD":
-            return 110 * 1000; // 110 seconds
-        case "FREE":
-            return 200 * 1000; // 200 seconds
-        default:
-            return 0;
-    }
+  switch (rank) {
+      case "ADMINISTRADOR":
+          return 0;
+      case "PLUS":
+          return 10 * 1000; // 10 seconds
+      case "VIP":
+          return 30 * 1000; // 30 seconds
+      case "STANDARD":
+          return 110 * 1000; // 110 seconds
+      case "FREE":
+          return 200 * 1000; // 200 seconds
+      default:
+          return 0;
+  }
 }
 
 handler.help = ['ucred @user <amount>']
