@@ -23,25 +23,25 @@ let str = `┌───「 *MENÚ COMANDOS* 」
 ▢ *[✳️]* *RESPUESTA:* DATOS RENIEC BASICOS
 
 ▢ *[📍]* *RENIEC MEDIO [PREMIUM]:*
-▢ *[✳️]* *ESTADO:* *OFF* *[❌]*
+▢ *[✳️]* *ESTADO:* *ONLINE* *[✅]*
 ▢ *[✳️]* *USO:* /dnix 12345678
 ▢ *[✳️]* *CONSUMO:* 1 CREDITOS
 ▢ *[✳️]* *RESPUESTA:* DATOS RENIEC MEDIOS
 
 ▢ *[📍]* *RENIEC PLUS [PREMIUM]:*
-▢ *[✳️]* *ESTADO:* *ONLINE* *[✅]*
+▢ *[✳️]* *ESTADO:* *OFFLINE* *[❌]*
 ▢ *[✳️]* *USO:* /dniz 12345678
 ▢ *[✳️]* *CONSUMO:* 2 CREDITOS
 ▢ *[✳️]* *RESPUESTA:* DATOS RENIEC PLUS
 
 ▢ *[📍]* *RENIEC NOMBRES [PREMIUM]:*
-▢ *[✳️]* *ESTADO:* *OFF* *[❌]*
+▢ *[✳️]* *ESTADO:* *OFFLINE* *[❌]*
 ▢ *[✳️]* *USO:* /nm Pedro|Castillo|Terrones|50-54
 ▢ *[✳️]* *CONSUMO:* 1 CREDITOS
 ▢ *[✳️]* *RESPUESTA:* DATOS NOMBRES RENIEC
 
 ▢ *[📍]* *FAMILIARES [PREMIUM]:*
-▢ *[✳️]* *ESTADO:* *OFF* *[❌]*
+▢ *[✳️]* *ESTADO:* *OFFLINE* *[❌]*
 ▢ *[✳️]* *USO:* /fam 12345678
 ▢ *[✳️]* *CONSUMO:* 5 CREDITOS
 ▢ *[✳️]* *RESPUESTA:* BUSCA DATOS FAMILIARES
@@ -50,10 +50,10 @@ let str = `┌───「 *MENÚ COMANDOS* 」
 ▢ *[✳️]* *ESTADO:* *ONLINE* *[✅]*
 ▢ *[✳️]* *USO:* /hogarp 12345678
 ▢ *[✳️]* *CONSUMO:* 5 CREDITOS
-▢ *[✳️]* *RESPUESTA:* BUSCA DATOS HOGAR
+▢ *[✳️]* *RESPUESTA:* BUSCA DATOS HOGAR META
 
 ▢ *[📍]* *TELEFONIA [PREMIUM]:*
-▢ *[✳️]* *ESTADO:* *OFF* *[❌]*
+▢ *[✳️]* *ESTADO:* *OFFLINE* *[❌]*
 ▢ *[✳️]* *USO:* /tel 12345678
 ▢ *[✳️]* *USO:* /tel 123456789
 ▢ *[✳️]* *CONSUMO:* 5 CREDITOS
@@ -70,7 +70,14 @@ let str = `┌───「 *MENÚ COMANDOS* 」
 ▢ *[✳️]* *ESTADO:* *ONLINE* *[✅]*
 ▢ *[✳️]* *USO:* /soat C9K460
 ▢ *[✳️]* *CONSUMO:* 5 CREDITOS
-▢ *[✳️]* *RESPUESTA:* BUSCA DATOS SOAT
+▢ *[✳️]* *RESPUESTA:* BUSCA DATOS SOAT HISTORIAL
+
+▢ *[📍]* *YAPE FAKE [PREMIUM]:*
+▢ *[✳️]* *ESTADO:* *ONLINE* *[✅]*
+▢ *[✳️]* *USO:* /yape NOMBRES|MONTO|TELÉFONO
+▢ *[✳️]* *USO:* /yape JOSE PEDRO CASTILLO TERRONES|400|999
+▢ *[✳️]* *CONSUMO:* 5 CREDITOS
+▢ *[✳️]* *RESPUESTA:* GENERA CAPTURA YAPE FAKE
 └──────────────`
 
     conn.sendFile(m.chat, pp, 'perfil.jpg', str, m, false, { mentions: [who] })
