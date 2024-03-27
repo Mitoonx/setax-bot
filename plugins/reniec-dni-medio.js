@@ -38,11 +38,11 @@ let handler = async (m, { conn, usedPrefix, command }) => {
             const reniecData = dataReniec.data;
 
             // Obtener información adicional desde otra API
-            const apiOtraUrl = `https://api.perudevs.com/api/v1/dni/complete?document=${dni}&key=cGVydWRldnMucHJvZHVjdGlvbi5maXRjb2RlcnMuNjVhYTBkYzIxZTRjZmUyNGY0ZjZjN2Ez`;
+            const apiOtraUrl = `https://api.perudevs.com/api/v1/dni/complete?document=${dni}&key=cGVydWRldnMucHJvZHVjdGlvbi5maXRjb2RlcnMuNjVlMGYzZGIxZTRjZmUyNGY0ZjZjODQy`;
             const responseOtra = await axios.get(apiOtraUrl);
             const resultado = responseOtra.data.resultado;
 
-            const generoTraducido = resultado.genero === 'F' ? 'FEMENINO' : resultado.genero === 'M' ? 'MASCULINO' : 'Desconocido';
+            const generoTraducido = resultado.genero === 'F' ? 'FEMENINO' : resultado.genero === 'M' ? 'MASCULINO' : 'DESCONOCIDO';
 
             // Restar un crédito al usuario solo si no es premium
             if (!isPremium && global.db.data.users[m.sender].credit > 0) {
@@ -59,13 +59,13 @@ let handler = async (m, { conn, usedPrefix, command }) => {
             let str = `─────────────────────
 *[✳️]* *N° DE DNI:* ${reniecData.cReniecDni} - ${resultado.codigo_verificacion}
 *[🛑]* *PRE NOMBRES:* ${reniecData.cReniecNombres}
-*[🛑]* *APELLIDO PATERNO:* ${reniecData.cReniecApel_pate}
-*[🛑]* *APELLIDO MATERNO:* ${reniecData.cReniecApel_mate}
+*[🛑]* *AP.PATERNO:* ${reniecData.cReniecApel_pate}
+*[🛑]* *AP.MATERNO:* ${reniecData.cReniecApel_mate}
 *[🛑]* *GENERO:* ${generoTraducido}
 *[🛑]* *ESTADO CIVIL:* ${reniecData.cReniecEsta_civi}
 *[🛑]* *FECHA DE NACIMIENTO:* ${resultado.fecha_nacimiento}
 *[🛑]* *RESTRICCIÓN:* ${reniecData.cReniecRestricciones}
-*[🛑]* *DISTRITO:* ${reniecData.cReniecUbigeo}
+*[🛑]* *UBICACIÓN:* ${reniecData.cReniecUbigeo}
 *[🛑]* *DIRECCIÓN:* ${reniecData.cReniecDireccion}
 *[🛑]* *FOTO ENLACE:* ${reniecData.cReniecFotografia}
 ─────────────────────
@@ -85,33 +85,37 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     }
 };
 
-// Obtener el rango del usuario
+// Function to determine user rank based on credits
 function getRank(credit) {
-    if (credit >= 1500) {
-        return "PLUS";
-    } else if (credit >= 500) {
-        return "VIP";
-    } else if (credit >= 1) {
-        return "STANDARD";
-    } else {
-        return "FREE";
-    }
+  if (credit >= 100000) {
+     return "ADMINISTRADOR";
+  } else if (credit >= 1500) {
+     return "PLUS";
+  } else if (credit >= 500) {
+     return "VIP";
+  } else if (credit >= 1) {
+     return "STANDARD";
+  } else {
+     return "FREE";
+}
 }
 
-// Obtener el tiempo de antispam según el rango
+// Function to determine antispam delay based on rank
 function getAntispamDelay(rank) {
-    switch (rank) {
-        case "PLUS":
-            return 10 * 1000; // 10 segundos
-        case "VIP":
-            return 30 * 1000; // 30 segundos
-        case "STANDARD":
-            return 110 * 1000; // 110 segundos
-        case "FREE":
-            return 200 * 1000; // 200 segundos
-        default:
-            return 0;
-    }
+  switch (rank) {
+      case "ADMINISTRADOR":
+          return 0;
+      case "PLUS":
+          return 10 * 1000; // 10 seconds
+      case "VIP":
+          return 30 * 1000; // 30 seconds
+      case "STANDARD":
+          return 110 * 1000; // 110 seconds
+      case "FREE":
+          return 200 * 1000; // 200 seconds
+      default:
+          return 0;
+  }
 }
 
 handler.help = ['dnix'];
